@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Recipe</title>
+</head>
+<body>
+    <div style="display:flex;justify-content: space-between;">
+        <H1>{{logged_user.first_name}}'s recipes</H1>
+        <a href="/dashboard">back to recipes</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Under 30mins</th>
+            <th>Actions</th>
+        </tr>
+        {% for this_recipe in logged_user.all_recipes %}
+        <tr>
+            <td>{{this_recipe.name}}</td>
+            <td>{{this_recipe.description}}</td>
+            <td>{% if this_recipe.under_30mins==1%} Yes {% else %} No {% endif%}</td>
+            <td>
+                <a href="/recipes/{{this_recipe.id}}/view">View recipe</a>
+                |<a href="/recipes/{{this_recipe.id}}/edit">Edit</a>|
+                <a href="/recipes/{{this_recipe.id}}/delete/">Delete</a>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+
+
+
+</body>
+</html>

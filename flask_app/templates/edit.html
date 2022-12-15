@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Share</title>
+</head>
+<body>
+    <div style="display:flex;justify-content: space-between;">
+        <H1>Edit recipe!</H1>
+        <a href="/dashboard">back to recipes</a>
+        <a href="/logout">Logout</a>
+    </div>
+    {% for message in get_flashed_messages() %}
+        <p>{{message}}</p>
+    {%endfor%}
+    <form action="/recipes/{{one_recipe.id}}/update" method="post" style="display:flex;">
+        <div>
+            <label >Name:</label>
+            <input type='text' name='name' id="name" value="{{one_recipe.name}}"><br>
+
+            <label >Description:</label>
+            <textarea name="description" id="description" cols="30" rows="10" >{{one_recipe.description}}</textarea><br>
+
+            <label >Instructions:</label>
+            <textarea name="instructions" id="instructions" cols="30" rows="10">{{one_recipe.instructions}}</textarea><br>
+        </div>
+
+        <div>
+
+            <label >Date Cooked/made:</label>
+            <input  type='date' name='date' id="date" value="{{one_recipe.date}}"><br>
+            <div>
+                <p>Under 30mins</p>
+                <label >Yes</label>
+                <input type='radio' name='under_30mins' id="under_30mins" value="1" {% if one_recipe.under_30mins==1%} checked {% endif%}><br>
+                <label >No</label>
+                <input type='radio' name='under_30mins' id="under_30mins" value="0"{% if one_recipe.under_30mins==0%} checked {% endif%}><br>
+
+            </div>
+
+
+            <button>Submit</button>
+        </div>
+
+
+
+    </form>
+
+
+</body>
+</html>
